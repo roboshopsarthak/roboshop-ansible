@@ -1,0 +1,4 @@
+- name: Load Golang
+  ansible.builtin.include.role:
+    name: common
+    task_from: golang_setup.yml
