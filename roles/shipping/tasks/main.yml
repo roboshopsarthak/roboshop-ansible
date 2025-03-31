@@ -1,23 +1,28 @@
-- name: Load Moven
+# - name: Load Moven
+#   ansible.builtin.include_role:
+#     name: common
+#     tasks_from: maven_setup.yml
+
+# - name: Install Mysql Server
+#   ansible.builtin.dnf:
+#     name: mysql
+#     state: installed
+
+# - name: Load the Sql File
+#   ansible.builtin.shell: mysql -h mysql-{{ env }}.sarthak1207.shop -uroot -p{{ lookup('hashi_vault', 'roboshop-{{ env }}/data/shipping:MYSQL_ROOT_PASSWORD token={{ vault_token }} url=http://vault-internal.sarthak1207.shop:8200') }} < /app/db/{{ item }}.sql
+#   loop:
+#     - schema 
+#     - app-user 
+#     - master-data
+
+# - name: Restart Shipping
+#   ansible.builtin.systemd_service:
+#     name: shipping
+#     state: restarted
+
+# ##Password hardcode we will update later
+
+- name: Install Docker
   ansible.builtin.include_role:
     name: common
-    tasks_from: maven_setup.yml
-
-- name: Install Mysql Server
-  ansible.builtin.dnf:
-    name: mysql
-    state: installed
-
-- name: Load the Sql File
-  ansible.builtin.shell: mysql -h mysql-{{ env }}.sarthak1207.shop -uroot -p{{ lookup('hashi_vault', 'roboshop-{{ env }}/data/shipping:MYSQL_ROOT_PASSWORD token={{ vault_token }} url=http://vault-internal.sarthak1207.shop:8200') }} < /app/db/{{ item }}.sql
-  loop:
-    - schema 
-    - app-user 
-    - master-data
-
-- name: Restart Shipping
-  ansible.builtin.systemd_service:
-    name: shipping
-    state: restarted
-
-##Password hardcode we will update later
+    tasks_from: docker

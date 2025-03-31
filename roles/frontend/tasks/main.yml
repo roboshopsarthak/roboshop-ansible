@@ -1,42 +1,47 @@
-- name: Disable default Nginx
-  ansible.builtin.shell: dnf module disable nginx -y
+# - name: Disable default Nginx
+#   ansible.builtin.shell: dnf module disable nginx -y
 
-- name: Enable Nginx 24 version
-  ansible.builtin.shell: dnf module enable nginx:1.24 -y
+# - name: Enable Nginx 24 version
+#   ansible.builtin.shell: dnf module enable nginx:1.24 -y
 
-- name: Install Nginx
-  ansible.builtin.dnf:
-    name: nginx
-    state: installed
+# - name: Install Nginx
+#   ansible.builtin.dnf:
+#     name: nginx
+#     state: installed
 
-- name: Copy nginx config file
-  ansible.builtin.template:
-    src: nginx.conf
-    dest: /etc/nginx/nginx.conf
+# - name: Copy nginx config file
+#   ansible.builtin.template:
+#     src: nginx.conf
+#     dest: /etc/nginx/nginx.conf
 
-- name: Remove the application directory
-  ansible.builtin.file:
-    path: /usr/share/nginx/html
-    state: directory
+# - name: Remove the application directory
+#   ansible.builtin.file:
+#     path: /usr/share/nginx/html
+#     state: directory
 
-- name: Create a application directory
-  ansible.builtin.file:
-    path: /usr/share/nginx/html
-    state: directory
+# - name: Create a application directory
+#   ansible.builtin.file:
+#     path: /usr/share/nginx/html
+#     state: directory
 
-- name: Download and extract a zip file
-  ansible.builtin.unarchive:
-    src: https://roboshop-artifacts.s3.amazonaws.com/{{ component }}-v3.zip
-    dest: /usr/share/nginx/html
-    remote_src: yes
+# - name: Download and extract a zip file
+#   ansible.builtin.unarchive:
+#     src: https://roboshop-artifacts.s3.amazonaws.com/{{ component }}-v3.zip
+#     dest: /usr/share/nginx/html
+#     remote_src: yes
 
-- name: Start nginx
-  ansible.builtin.systemd_service:
-    name: nginx
-    state: restarted
-    enabled: yes
+# - name: Start nginx
+#   ansible.builtin.systemd_service:
+#     name: nginx
+#     state: restarted
+#     enabled: yes
 
-# #source is used to refer on any script which we want to use in existing script
-# source common.sh
-# #declaring varibale used in function
-# component=frontend
+# # #source is used to refer on any script which we want to use in existing script
+# # source common.sh
+# # #declaring varibale used in function
+# # component=frontend
+
+- name: Install Docker
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: docker

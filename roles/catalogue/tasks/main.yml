@@ -1,22 +1,27 @@
-- name: Load Nodejs
+# - name: Load Nodejs
+#   ansible.builtin.include_role:
+#     name: common
+#     tasks_from: nodejs.yml
+
+# - name: Copy Mongodb repo file
+#   ansible.builtin.copy:
+#     src: mongo.repo
+#     dest: /etc/yum.repos.d/mongo.repo
+
+# - name: Install Mongodb Client
+#   ansible.builtin.dnf:
+#     name: mongodb-mongosh
+#     state: installed
+
+# - name: Load Master Data
+#   ansible.builtin.shell: mongosh --host mongodb-{{ env }}.sarthak1207.shop </app/db/master-data.js
+
+# - name: Restart Catalogue Service
+#   ansible.builtin.systemd_service:
+#     name: catalogue
+#     state: restarted
+
+- name: Install Docker
   ansible.builtin.include_role:
     name: common
-    tasks_from: nodejs.yml
-
-- name: Copy Mongodb repo file
-  ansible.builtin.copy:
-    src: mongo.repo
-    dest: /etc/yum.repos.d/mongo.repo
-
-- name: Install Mongodb Client
-  ansible.builtin.dnf:
-    name: mongodb-mongosh
-    state: installed
-
-- name: Load Master Data
-  ansible.builtin.shell: mongosh --host mongodb-{{ env }}.sarthak1207.shop </app/db/master-data.js
-
-- name: Restart Catalogue Service
-  ansible.builtin.systemd_service:
-    name: catalogue
-    state: restarted
+    tasks_from: docker
