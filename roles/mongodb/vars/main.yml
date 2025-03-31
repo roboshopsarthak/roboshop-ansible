@@ -1,5 +1,3 @@
-components: ["catalogue","cart","user","payment","shipping"]
-
 lvm_sizes: 
   - {volume: varvol, size: 12G}
   - {volume: rootvol, size: 6}
