@@ -2,7 +2,7 @@
   ansible.builtin.shell: set-prompt {{ component }}-{{ env }}
 
 - name: Increase disk partition
-  ansible.builtin.shell: "growpart /dev/nvme0n1 4"
+  ansible.builtin.shell: "growpart /dev/xvda 4"
   ignore_errors: true
 
 - name: Extend LV Size
