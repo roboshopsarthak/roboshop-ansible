@@ -6,6 +6,6 @@
   ignore_errors: true
 
 - name: Extend LV Size
-  ansible.builtin.shell: lvextend -r -L {{ item.sizes }} /dev/mapper/{{ item.volumne}}
+  ansible.builtin.shell: lvextend -r -L {{ item.size }} /dev/mapper/{{ item.volume}}
   ignore_errors: true
   loop: "{{ lvm_sizes }}"
