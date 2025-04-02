@@ -7,3 +7,17 @@
   ansible.builtin.include_role:
     name: common
     tasks_from: docker
+
+- name: Start app container
+  containers.podman.podman_container:
+    name: user
+    image: public.ecr.aws/w8x4g9h7/roboshop-v3/user
+    state: started
+    restart_policy: "always"
+    restart : true
+    ports:
+        - "8080:8080"
+    env:
+        MONGO: "{{ lookup('hashi_vault', 'roboshop-{{ env }}/data/user:MONGO token={{ vault_token }} url=http://vault-internal.sarthak1207.shop:8200') }}"
+        MONGO_URL: "{{ lookup('hashi_vault', 'roboshop-{{ env }}/data/user:MONGO_URL token={{ vault_token }} url=http://vault-internal.sarthak1207.shop:8200') }}"
+        REDIS_URL: "{{ lookup('hashi_vault', 'roboshop-{{ env }}/data/user:REDIS_URL token={{ vault_token }} url=http://vault-internal.sarthak1207.shop:8200') }}"
