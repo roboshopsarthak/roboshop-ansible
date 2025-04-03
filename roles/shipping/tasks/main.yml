@@ -59,4 +59,4 @@
         DB_HOST: "{{ lookup('hashi_vault', 'roboshop-{{ env }}/data/shipping:DB_HOST token={{ vault_token }} url=http://vault-internal.sarthak1207.shop:8200') }}"
         DB_USER: "{{ lookup('hashi_vault', 'roboshop-{{ env }}/data/shipping:DB_USER token={{ vault_token }} url=http://vault-internal.sarthak1207.shop:8200') }}"
         DB_PASS: "{{ lookup('hashi_vault', 'roboshop-{{ env }}/data/shipping:DB_PASS token={{ vault_token }} url=http://vault-internal.sarthak1207.shop:8200') }}"
-        SCHEMA_FILE: {{ item }}
+        SCHEMA_FILE: "{{ item }}"
