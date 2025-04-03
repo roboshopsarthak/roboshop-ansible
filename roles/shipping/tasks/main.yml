@@ -46,7 +46,7 @@
     - db/schema.sql
     - master-data.sql
   containers.podman.podman_container:
-    name: shipping-schema
+    name: shipping-schema-{{item}}
     image: public.ecr.aws/w8x4g9h7/roboshop-v3/schema-load
     state: started
     restart_policy: "always"
