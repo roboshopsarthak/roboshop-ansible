@@ -47,12 +47,9 @@
     - master-data
   containers.podman.podman_container:
     name: shipping-schema-{{item}}
+    recreate: true
     image: public.ecr.aws/w8x4g9h7/roboshop-v3/schema-load
     state: started
-    restart_policy: "always"
-    restart : true
-    ports:
-        - "8080:8080"
     env:
         DB_TYPE: "{{ lookup('hashi_vault', 'roboshop-{{ env }}/data/shipping:DB_TYPE token={{ vault_token }} url=http://vault-internal.sarthak1207.shop:8200') }}"
         APP_GIT_URL: "{{ lookup('hashi_vault', 'roboshop-{{ env }}/data/shipping:APP_GIT_URL token={{ vault_token }} url=http://vault-internal.sarthak1207.shop:8200') }}"
